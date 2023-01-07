@@ -1,0 +1,25 @@
+{
+    "private": true,
+    "version": "0.0.1",
+    "devDependencies": {
+        "brighterscript": "^0.61.2",
+        "maestro-roku-bsc-plugin": "^0.25.7"
+    },
+    "ropm": {
+        "rootDir": "src",
+        "packageRootDir": "dist",
+        "noprefix": [
+            "maestro"
+        ]
+    },
+    "scripts": {
+        "prebuild": "rm -rf dist",
+        "build": "bsc",
+        "build:prod": "npm run build -- --sourceMap=false"
+    },
+    "dependencies": {
+        "bslib": "npm:@rokucommunity/bslib@^0.1.1",
+        "log": "npm:roku-log@^0.9.3",
+        "maestro": "npm:maestro-roku@^0.54.7"
+    }
+}

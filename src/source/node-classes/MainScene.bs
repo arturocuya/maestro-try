@@ -1,0 +1,63 @@
+import "pkg:/source/roku_modules/maestro/view/NodeClass.brs"
+import "pkg:/source/roku_modules/maestro/core/Result.brs"
+import "pkg:/source/roku_modules/maestro/core/MIOC.brs"
+import "pkg:/components/roku_modules/maestro/view/mixin/FocusMixin.brs"
+
+enum IocInstance
+    NavController = "NavController"
+end enum
+
+@node("MainScene", "Scene")
+class MainScene extends mv.NodeClass
+    public navController as mc.types.node
+    private launchSequence as mc.types.node
+
+    function new()
+        super("MainScene")
+    end function
+
+    sub begin()
+        ? "begin"
+        m.startLaunchSequence()
+    end sub
+
+    ' Required to initialize maestro framework
+    sub startLaunchSequence()
+        m.launchSequence = m.createTask("mc_LaunchSequence", invalid, m.onLaunchSequenceResult)
+    end sub
+
+    sub onLaunchSequenceResult(result as mc.Result)
+        if (result.isOk)
+            ? "launch sequence complete"
+            m.navController = m.createSGNode("mv_navController", m.top, "navController")
+            m.setInstance(IocInstance.NavController, m.navController)
+            mv.setFocus(m.top)
+            m.showInitialScreen()
+        else
+            ? "launch sequence failed"
+        end if
+    end sub
+
+    sub showInitialScreen()
+        initialScreen = m.createSGNode("HomeScreen", invalid, "homeScreen", {
+            text: "Initial"
+        })
+        m.navController@.push(initialScreen)
+    end sub
+
+    private sub onKeyPressRight()
+        ? "onKeyPressRight"
+        ' screen = m.createSGNode("HomeScreen", invalid, "rightScreen", {
+        '     text: "Right"
+        ' })
+        ' m.navController@.push(screen)
+    end sub
+
+    private sub onKeyPressLeft()
+        ? "onKeyPressLeft"
+        ' screen = m.createSGNode("HomeScreen", invalid, "leftScreen", {
+        '     text: "Left"
+        ' })
+        ' m.navController@.push(screen)
+    end sub
+end class

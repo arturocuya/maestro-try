@@ -1,0 +1,21 @@
+{
+    "diagnosticLevel": "error",
+    "retainStagingFolder": true,
+    "rootDir": "../src/",
+    "plugins": [
+        "maestro-roku-bsc-plugin"
+    ],
+    "maestro": {},
+    "files": [
+        "source/**/*",
+        "components/**/*",
+        "images/**/*",
+        "fonts/**/*",
+        "meta/**/*",
+        "manifest"
+    ],
+    "stagingFolderPath": "dist/build",
+    "createPackage": false,
+    "sourceMap": true,
+    "diagnosticFilters": ["**/roku_modules/**/*", "**/node_modules/**/*", 1013]
+}

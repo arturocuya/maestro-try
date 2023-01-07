@@ -1,0 +1,23 @@
+import "pkg:/source/roku_modules/maestro/view/BaseScreen.brs"
+
+@node("HomeScreen", "mv_BaseScreen")
+class HomeScreen extends mv.BaseScreen
+    public text as string
+
+    function new()
+        super("HomeScreen")
+    end function
+
+    protected override function initialize()
+        super.initialize()
+        
+        m.createSGNode("mv_Rectangle", m.top, "bgRect", {
+            size: [1920, 1080]
+            color: "#9F2B68"
+        })
+
+        m.createSGNode("Label", m.top, "label", {
+            text: m.text
+        })
+    end function
+end class
