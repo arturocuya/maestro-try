@@ -1,0 +1,33 @@
+import "pkg:/source/roku_modules/maestro/view/BaseView.brs"
+import "pkg:/source/roku_modules/maestro/view/Animation.brs"
+
+@node("HorizontalTextScroll", "mv_BaseView")
+class HorizontalTextScroll extends mv.BaseView
+    private animation as mc.types.node
+    private text as mc.types.node
+    private bg as mc.types.node
+
+    function new()
+        super("HorizontalTextScroll")
+    end function
+
+    protected override function initialize()
+        super.initialize()
+
+        m.top.translation = [100, 100]
+        m.top.clippingRect = [0, 0, 100, 100]
+
+        m.bg = m.createSGNode("Rectangle", m.top, "bg", {
+            color: "#0000FF", width: 100, height: 100
+        })
+
+        m.text = m.createSGNode("Label", m.top, "label", {
+            text: "Hello world scrolling text",
+            translation: [0, 30]
+        })
+
+        m.animation = mv.animations.Move(m.text, 4, [100, 30], [m.text.boundingRect().width * -1, 30])
+        m.animation.setRepeat(true)
+        m.animation.start()
+    end function
+end class

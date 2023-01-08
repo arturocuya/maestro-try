@@ -2,6 +2,8 @@ import "pkg:/source/roku_modules/maestro/view/BaseScreen.brs"
 
 @node("HomeScreen", "mv_BaseScreen")
 class HomeScreen extends mv.BaseScreen
+    @inject("NavController")
+    private navController
     public text as string
 
     function new()
@@ -16,8 +18,14 @@ class HomeScreen extends mv.BaseScreen
             color: "#9F2B68"
         })
 
-        m.createSGNode("Label", m.top, "label", {
-            text: m.text
-        })
+        m.createSGNode("HorizontalTextScroll", m.top)
     end function
+
+    private sub onKeyPressRight()
+        ? "home right"
+    end sub
+
+    private sub onKeyPressLeft()
+        ? "home left"
+    end sub
 end class
